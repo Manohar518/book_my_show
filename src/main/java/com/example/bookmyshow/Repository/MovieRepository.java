@@ -1,29 +1,15 @@
 package com.example.bookmyshow.Repository;
 
-import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.example.bookmyshow.Models.MovieEntity;
+import com.example.bookmyshow.Models.ShowSeatEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RestController
-public class MovieRepository {
+@Repository
+public interface MovieRepository extends JpaRepository<ShowSeatEntity,Integer> {
 
-    Map<Integer, Student> db = new HashMap<>();  //database
+    MovieEntity findByMovieName(String movieName);
 
-    @GetMapping("/get_info")
-    Student getStudent(@RequestParam("id") int admnNo, @RequestParam("id2") int admnNo2) {
-        return db.get(admnNo);
-    }
-
-    @PostMapping("/add")
-    String addStudent(@RequestBody Student student) {
-        db.put(student.getAdmnNo(), student);
-        return "Student has been added successfully";
-    }
-
-    @DeleteMapping("/delete/{id}")
-    String deleteStudent(@PathVariable("id") int admnNo) {
-        db.remove(admnNo);
-        return "Student deleted";
-    }
+    void save(MovieEntity movieEntity);
 }

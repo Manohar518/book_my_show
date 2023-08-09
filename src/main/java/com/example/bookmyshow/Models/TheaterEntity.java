@@ -1,5 +1,6 @@
 package com.example.bookmyshow.Models;
-import javax.persistence.*;
+
+//import javax.persistence.*;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class TheaterEntity {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +38,5 @@ public class TheaterEntity {
     //List of theater seats
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
     List<TheaterSeatEntity> theaterSeatEntityList;
-
-
 
 }

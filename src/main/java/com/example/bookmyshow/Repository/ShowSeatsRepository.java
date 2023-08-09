@@ -1,4 +1,9 @@
 package com.example.bookmyshow.Repository;
 
-public class ShowSeatsRepository {
+import com.example.bookmyshow.Models.ShowSeatEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ShowSeatsRepository extends JpaRepository<ShowSeatEntity,Integer> {
 }

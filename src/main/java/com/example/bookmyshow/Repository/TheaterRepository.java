@@ -1,4 +1,10 @@
 package com.example.bookmyshow.Repository;
 
-public class TheaterRepository {
+import com.example.bookmyshow.Models.TheaterEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TheaterRepository extends JpaRepository<TheaterEntity,Integer> {
+        TheaterEntity findByNameAndCity(String name,String city);
 }

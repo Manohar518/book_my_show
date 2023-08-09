@@ -1,13 +1,24 @@
 package com.example.bookmyshow.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.*;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+//import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
+@Table(name = "movies")
+@Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class MovieEntity {
     @Id
@@ -19,10 +30,8 @@ public class MovieEntity {
 
     private int duration;
 
-
     private Date releaseDate;
 
     @OneToMany(mappedBy = "movie",cascade = CascadeType.ALL)
     private List<ShowEntity> listOfShows;
-
 }

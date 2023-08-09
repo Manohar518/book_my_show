@@ -1,51 +1,50 @@
 package com.example.bookmyshow.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
-@Getter
-@Setter
-@Entity
-@EntityListeners(value = { AuditingEntityListener.class })
-@Table(name = "tickets")
-@NoArgsConstructor
-@Builder
-@AllArgsConstructor
 public class TicketEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "alloted_seats", nullable = false)
-    private String allottedSeats;
+    private String alloted_seats;
 
-    @Column(name = "amount", nullable = false)
-    private double amount;
+    private int amount;
 
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "booked_at", nullable = false)
-    private Date bookedAt;
+    private Date booked_at;
 
+    //Here you will connect
     @ManyToOne
-    @JsonIgnore
     @JoinColumn
-    private UserEntity user;
+    private UserEntity user; //
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn
     private ShowEntity show;
 
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<ShowSeatsEntity> seats;
+    @OneToMany(mappedBy = "ticket",cascade = CascadeType.ALL)
+    private List<ShowSeatEntity> bookedSeats;
+
+    public void setBookedSeats(List<ShowSeatEntity> bookedSeats) {
+    }
+
+    public void setAlloted_seats(String allotedSeats) {
+    }
+
+    public void setUser(UserEntity userEntity) {
+    }
+
+    public void setBooked_at(Date date) {
+    }
+
+    public void setAmount(int totalAmout) {
+    }
+
+    public void setShow(ShowEntity showEntity) {
+    }
 }

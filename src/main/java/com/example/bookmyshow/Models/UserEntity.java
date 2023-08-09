@@ -1,32 +1,45 @@
 package com.example.bookmyshow.Models;
 
+//import javax.persistence.*;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
-@Getter
-@Setter
+@Table(name="users")
+@Data
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
 public class UserEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "mobile", nullable = false)
     private String mobile;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) //bidirectional mapping
-    private List<TicketEntity> ticketEntities;
+
+    @CreationTimestamp
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date createdOn;
+
+    @UpdateTimestamp
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date updatedOn;
+
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    List<TicketEntity> listOfTickets;
+
 
 }

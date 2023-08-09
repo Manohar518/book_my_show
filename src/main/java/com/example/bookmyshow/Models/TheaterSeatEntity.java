@@ -1,23 +1,17 @@
 package com.example.bookmyshow.Models;
 
-
-
+import com.example.bookmyshow.Enums.SeatType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "show_seats")
-@Builder
-@AllArgsConstructor
+@Table(name = "theater_seats")
 @Data
 @NoArgsConstructor
-public class ShowSeatEntity {
-
+@AllArgsConstructor
+public class TheaterSeatEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,15 +21,17 @@ public class ShowSeatEntity {
     @Enumerated(value = EnumType.STRING)
     private SeatType seatType;
 
-    private boolean booked;
-
-    private Date bookedAt;
+    private int rate;
 
     @ManyToOne
     @JoinColumn
-    private ShowEntity show;
+    private TheaterEntity theater;
 
-    @ManyToOne
-    @JoinColumn
-    private TicketEntity ticket;
+    public TheaterSeatEntity(String seatNo,SeatType seatType,int rate){
+        this.seatNo = seatNo;
+        this.seatType = seatType;
+        this.rate = rate;
+    }
+
+
 }
