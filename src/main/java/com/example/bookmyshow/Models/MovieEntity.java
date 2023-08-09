@@ -9,33 +9,20 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-@Getter
-@Setter
-@Entity
-@Table(name = "movies")
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class MovieEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id; //Auto-generated
+    private int id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(nullable = false,unique = true)
+    private String movieName;
 
-
-    @Column(name = "release_date", columnDefinition = "DATE", nullable = false)
-    private LocalDate releaseDate;
+    private int duration;
 
 
-    //Connecting the other table
-    //Since this is the parent (how did we come to know : its having mappedBy and cascade )
-    //child table : its having @JoinColumn Annotation
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<ShowEntity> shows;
-}
-public class MovieEntity {
+    private Date releaseDate;
+
+    @OneToMany(mappedBy = "movie",cascade = CascadeType.ALL)
+    private List<ShowEntity> listOfShows;
+
 }
